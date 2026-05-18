@@ -56,4 +56,25 @@ describe("DataTable", () => {
     expect(screen.queryByRole("navigation", { name: "pagination" })).toBeNull();
     expect(screen.queryByText(/showing/i)).toBeNull();
   });
+      it("preserves whitespace-only search filter behavior", () => {
+    render(
+      <DataTable
+        columns={columns}
+        data={makeRows(3)}
+        enableSearch
+        searchPlaceholder="Search rows"
+        initialPageSize={8}
+        pageSizeOptions={[8, 16, 24]}
+      />
+    );
+
+    const search = screen.getByPlaceholderText("Search rows");
+
+    fireEvent.change(search, { target: { value: "   " } });
+
+    expect(screen.getByText("No results.")).toBeTruthy();
+    expect(screen.queryByText("Row 1")).toBeNull();
+    expect(screen.queryByText("Row 2")).toBeNull();
+    expect(screen.queryByText("Row 3")).toBeNull();
+  });
 });
