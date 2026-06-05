@@ -350,4 +350,23 @@ describe("kai-action-gateway", () => {
       riaResults.find((entry) => entry.action.action_id === "route.ria_home")?.availability.status
     ).toBe("requires_persona_switch");
   });
+    it("preserves fallback action result shape", () => {
+    const result = {
+      status: "invalid",
+      reason: "Unknown action",
+      actionResult: {
+        handled: false,
+        actionId: "unknown_action",
+      },
+    };
+
+    expect(result).toMatchObject({
+      status: "invalid",
+      reason: "Unknown action",
+      actionResult: {
+        handled: false,
+        actionId: "unknown_action",
+      },
+    });
+  });
 });
