@@ -354,7 +354,7 @@ function KaiSheet({
       <div className="mx-auto mt-[9px] h-[5px] w-9 rounded-full bg-[color:var(--one-fg3)]/35" />
       <header className="flex items-center gap-[11px] border-b border-[color:var(--one-line)] px-[18px] pb-3 pt-3">
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[color:var(--one-blue)] text-white">
-          <Bot className="h-4 w-4" />
+          <Bot aria-hidden="true" className="h-4 w-4" />
         </span>
         <span className="min-w-0 flex-1">
           <b className="block text-[17px] font-semibold text-[color:var(--one-fg)]">Kai</b>
@@ -565,7 +565,7 @@ export function KaiAnalysisPreviewView() {
             }}
             className="mt-5 flex h-12 items-center gap-2.5 rounded-[16px] bg-[color:var(--one-surface)] px-4"
           >
-            <Search className="h-[17px] w-[17px] shrink-0 text-[color:var(--one-fg3)]" />
+            <Search aria-hidden="true" className="h-[17px] w-[17px] shrink-0 text-[color:var(--one-fg3)]" />
             <input
               type="text"
               autoComplete="off"
@@ -631,12 +631,12 @@ export function KaiAnalysisPreviewView() {
             className={cn(analysisGlassClassName, "mt-3 flex w-full items-center gap-[11px] rounded-2xl px-3.5 py-2.5 text-left transition-transform active:scale-[0.99]")}
           >
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[color:var(--one-blue)] text-white">
-              <Bot className="h-4 w-4" />
+              <Bot aria-hidden="true" className="h-4 w-4" />
             </span>
             <span className="min-w-0 flex-1 text-[13px] leading-snug text-[color:var(--one-fg)]">
               <b className="font-semibold">Kai:</b> Tesla drove most of this week's gain. Concentration is your main risk - ask me for a rebalance plan.
             </span>
-            <ChevronRight className="h-[15px] w-[15px] shrink-0 text-[color:var(--one-fg3)]" />
+            <ChevronRight aria-hidden="true" className="h-[15px] w-[15px] shrink-0 text-[color:var(--one-fg3)]" />
           </button>
 
           <section className="mt-8">
