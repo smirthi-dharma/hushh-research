@@ -626,7 +626,7 @@ function AgentPopoverSurface({ customSize, setCustomSize }: AgentPopoverSurfaceP
           aria-label="Open Agent"
           title="Drag to reposition Agent, tap to open"
         >
-          <Bot className="h-4 w-4" />
+          <Bot aria-hidden="true" className="h-4 w-4" />
           <span className="hidden text-sm font-medium sm:inline">Agent</span>
         </Button>
       ) : null}
