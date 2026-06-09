@@ -876,7 +876,7 @@ function MobileSectionsFab({
           className="rounded-full px-4 shadow-[0_18px_60px_var(--morphy-cta-shadow)]"
           onClick={() => onOpenChange(true)}
         >
-          <Menu className="size-4" />
+          <Menu className="size-4" aria-hidden="true" />
           Sections
         </MorphyButton>
       </div>

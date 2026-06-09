@@ -2745,7 +2745,7 @@ export function AgentChatWorkspace({
                   aria-label="Open chat history"
                   title="Open chat history"
                 >
-                  <Menu className="h-4 w-4" />
+                  <Menu className="h-4 w-4" aria-hidden="true" />
                 </Button>
               ) : null}
               <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-border bg-background text-primary shadow-sm">
