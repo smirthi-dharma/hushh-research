@@ -56,7 +56,13 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error("[API] Backend error:", error);
+
+      if (process.env.NODE_ENV !== "production") {
+        console.error("[API] Backend error:", error);
+      } else {
+        console.error("[API] Backend error");
+      }
+
       return NextResponse.json(
         { error: "Failed to issue session token" },
         { status: response.status },
@@ -68,7 +74,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error("[API] Session token error:", error);
+    if (process.env.NODE_ENV !== "production") {
+      console.error("[API] Session token error:", error);
+    } else {
+      console.error("[API] Session token error");
+    }
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
