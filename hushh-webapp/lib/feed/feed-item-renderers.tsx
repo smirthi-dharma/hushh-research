@@ -85,7 +85,7 @@ export function presentFeedItem(item: FeedItem): FeedItemPresentation {
         icon,
         domainLabel,
         label: "Location shared",
-        description: "A live location share was started.",
+        description: counterparty ? `You shared live location with ${counterparty}.` : "A live location share was started.",
         href: ROUTES.ONE_LOCATION,
       };
     case "location_share_revoked":
@@ -93,7 +93,7 @@ export function presentFeedItem(item: FeedItem): FeedItemPresentation {
         icon,
         domainLabel,
         label: "Location share ended",
-        description: "A live location share was revoked.",
+        description: counterparty ? `You stopped sharing live location with ${counterparty}.` : "A live location share was revoked.",
         href: ROUTES.ONE_LOCATION,
       };
     case "location_share_expired":
@@ -101,7 +101,7 @@ export function presentFeedItem(item: FeedItem): FeedItemPresentation {
         icon,
         domainLabel,
         label: "Location share expired",
-        description: "A live location share expired.",
+        description: counterparty ? `Your live location share with ${counterparty} expired.` : "A live location share expired.",
         href: ROUTES.ONE_LOCATION,
       };
     case "location_access_request":
@@ -109,7 +109,7 @@ export function presentFeedItem(item: FeedItem): FeedItemPresentation {
         icon,
         domainLabel,
         label: "Location access requested",
-        description: "Someone asked to see your location.",
+        description: counterparty ? `${counterparty} requested access to your live location.` : "Someone asked to see your location.",
         href: ROUTES.ONE_LOCATION,
       };
     case "location_access_approved":
@@ -117,7 +117,7 @@ export function presentFeedItem(item: FeedItem): FeedItemPresentation {
         icon,
         domainLabel,
         label: "Location access approved",
-        description: "A location access request was approved.",
+        description: counterparty ? `You approved ${counterparty}'s location request.` : "A location access request was approved.",
         href: ROUTES.ONE_LOCATION,
       };
     case "location_access_denied":
@@ -125,7 +125,7 @@ export function presentFeedItem(item: FeedItem): FeedItemPresentation {
         icon,
         domainLabel,
         label: "Location access denied",
-        description: "A location access request was denied.",
+        description: counterparty ? `You denied ${counterparty}'s location request.` : "A location access request was denied.",
         href: ROUTES.ONE_LOCATION,
       };
     case "kai_analysis_completed": {

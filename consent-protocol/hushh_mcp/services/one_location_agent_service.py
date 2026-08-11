@@ -2383,13 +2383,18 @@ class OneLocationAgentService:
             if expires_at <= retention_cutoff:
                 continue
             owner_label = _identity_notification_label(self._identity_row(owner_user_id))
+            expired_recipient_identity = self._identity_row(recipient_user_id or "") if recipient_user_id else None
+            expired_recipient_label = _identity_notification_label(expired_recipient_identity, fallback="") if expired_recipient_identity else ""
             self._insert_event(
                 owner_user_id=owner_user_id,
                 actor_user_id=None,
                 recipient_user_id=recipient_user_id or None,
                 grant_id=grant_id,
                 event_type="location_share_expired",
-                metadata={"reason": "expires_at"},
+                metadata={
+                    "reason": "expires_at",
+                    "counterpart_label": expired_recipient_label,
+                },
             )
             if grant_id and recipient_user_id:
                 self._send_metadata_notification(
@@ -3425,13 +3430,18 @@ class OneLocationAgentService:
                 "Could not create the location share.",
                 status_code=500,
             )
+        recipient_identity = self._identity_row(recipient_user_id)
+        recipient_label = _identity_notification_label(recipient_identity, fallback="")
         self._insert_event(
             owner_user_id=owner_user_id,
             actor_user_id=owner_user_id,
             recipient_user_id=recipient_user_id,
             grant_id=grant["id"],
             event_type="location_share_created",
-            metadata={"duration_hours": duration},
+            metadata={
+                "duration_hours": duration,
+                "counterpart_label": recipient_label,
+            },
         )
         # Request approval has its own richer notification immediately after
         # this call. Sending share-created as well produces two alerts for one
@@ -3683,7 +3693,10 @@ class OneLocationAgentService:
               SELECT
                 g.owner_user_id, g.owner_user_id, g.recipient_user_id, g.id,
                 'location_share_created',
-                jsonb_build_object('duration_hours', g.duration_hours),
+                jsonb_build_object(
+                    'duration_hours', g.duration_hours,
+                    'counterpart_label', COALESCE(NULLIF(TRIM((SELECT display_name FROM actor_identity_cache WHERE user_id = g.recipient_user_id LIMIT 1)), ''), '')
+                ),
                 NOW()
               FROM completed_grant g
               RETURNING id
@@ -5190,18 +5203,24 @@ class OneLocationAgentService:
             )
         actor_is_owner = str(row.get("owner_user_id") or "") == owner_user_id
         recipient_user_id = str(row.get("recipient_user_id") or "") or None
+        owner_identity = self._identity_row(str(row.get("owner_user_id") or owner_user_id))
+        owner_label = _identity_notification_label(owner_identity)
+        recipient_identity = self._identity_row(recipient_user_id or "")
+        recipient_label = _identity_notification_label(recipient_identity)
+        owner_label_empty_fb = _identity_notification_label(owner_identity, fallback="")
+        recipient_label_empty_fb = _identity_notification_label(recipient_identity, fallback="")
+        counterpart_label = recipient_label_empty_fb if actor_is_owner else owner_label_empty_fb
         self._insert_event(
             owner_user_id=str(row.get("owner_user_id") or owner_user_id),
             actor_user_id=owner_user_id,
             recipient_user_id=recipient_user_id,
             grant_id=grant_id,
             event_type="location_share_revoked",
-            metadata={"reason": "owner_revoke" if actor_is_owner else "recipient_revoke"},
+            metadata={
+                "reason": "owner_revoke" if actor_is_owner else "recipient_revoke",
+                "counterpart_label": counterpart_label,
+            },
         )
-        owner_identity = self._identity_row(str(row.get("owner_user_id") or owner_user_id))
-        owner_label = _identity_notification_label(owner_identity)
-        recipient_identity = self._identity_row(recipient_user_id or "")
-        recipient_label = _identity_notification_label(recipient_identity)
         notification_user_id = (
             recipient_user_id if actor_is_owner else str(row.get("owner_user_id") or "")
         )
@@ -5305,16 +5324,20 @@ class OneLocationAgentService:
                 "Could not create the access request.",
                 status_code=500,
             )
+        requester_identity = self._identity_row(requester_user_id)
+        requester_label = _identity_notification_label(requester_identity, fallback="Someone")
+        counterpart_label = _identity_notification_label(requester_identity, fallback="")
         self._insert_event(
             owner_user_id=owner_user_id,
             actor_user_id=requester_user_id,
             recipient_user_id=requester_user_id,
             request_id=request["id"],
             event_type="location_access_request",
-            metadata={"referred": bool(referred_by_user_id)},
+            metadata={
+                "referred": bool(referred_by_user_id),
+                "counterpart_label": counterpart_label,
+            },
         )
-        requester_identity = self._identity_row(requester_user_id)
-        requester_label = _identity_notification_label(requester_identity, fallback="Someone")
         if notify_owner:
             self._send_metadata_notification(
                 user_id=owner_user_id,
@@ -5376,6 +5399,8 @@ class OneLocationAgentService:
             """,
             {"request_id": request_id, "grant_id": grant["id"]},
         )
+        requester_identity = self._identity_row(requester_user_id)
+        requester_label = _identity_notification_label(requester_identity, fallback="")
         self._insert_event(
             owner_user_id=owner_user_id,
             actor_user_id=owner_user_id,
@@ -5383,7 +5408,10 @@ class OneLocationAgentService:
             grant_id=grant["id"],
             request_id=request_id,
             event_type="location_access_approved",
-            metadata={"duration_hours": normalize_duration_hours(duration_hours)},
+            metadata={
+                "duration_hours": normalize_duration_hours(duration_hours),
+                "counterpart_label": requester_label,
+            },
         )
         owner_identity = self._identity_row(owner_user_id)
         owner_label = _identity_notification_label(owner_identity)
@@ -5426,13 +5454,18 @@ class OneLocationAgentService:
                 "Pending location access request was not found.",
                 status_code=404,
             )
+        requester_user_id = str(row.get("requester_user_id") or "") or None
+        requester_identity = self._identity_row(requester_user_id) if requester_user_id else None
+        requester_label = _identity_notification_label(requester_identity, fallback="") if requester_identity else ""
         self._insert_event(
             owner_user_id=owner_user_id,
             actor_user_id=owner_user_id,
-            recipient_user_id=str(row.get("requester_user_id") or "") or None,
+            recipient_user_id=requester_user_id,
             request_id=request_id,
             event_type="location_access_denied",
-            metadata={},
+            metadata={
+                "counterpart_label": requester_label,
+            },
         )
         owner_identity = self._identity_row(owner_user_id)
         owner_label = _identity_notification_label(owner_identity)
