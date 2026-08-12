@@ -6963,10 +6963,8 @@ export function OneLocationAgentPageContent({
                           busy={busy}
                           busyKey="request"
                           onClick={() => void handleRequestAccess()}
-                          disabled={
-                            !vaultOwnerToken || !selectedRequestOwners.length
-                          }
-                          className="h-12 w-full rounded-[16px] bg-gradient-to-b from-[color:var(--app-accent-bright)] to-[color:var(--app-accent)] text-[16px] font-semibold text-[color:var(--app-accent-fg)] shadow-[0_4px_14px_var(--app-accent-ring)] hover:opacity-95"
+                          disabled={!vaultOwnerToken || selectedRequestOwners.length === 0}
+                          className="h-12 w-full rounded-[16px] bg-gradient-to-b from-[color:var(--app-accent-bright)] to-[color:var(--app-accent)] text-[16px] font-semibold text-[color:var(--app-accent-fg)] shadow-[0_4px_14px_var(--app-accent-ring)] hover:opacity-95 disabled:from-muted disabled:to-muted disabled:text-muted-foreground disabled:opacity-100 disabled:shadow-none"
                         >
                           <Send className="mr-2 h-4 w-4" aria-hidden="true" />
                           Send Request

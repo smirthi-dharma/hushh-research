@@ -2552,6 +2552,11 @@ describe("OneLocationAgentPage", () => {
 
     await waitFor(() => expect(mockGetState).toHaveBeenCalled());
     await openAskFlow();
+
+    // Ensure CTA is disabled when no recipient is selected
+    const sendRequestBtn = screen.getByRole("button", { name: /Send request/i });
+    expect(sendRequestBtn).toBeDisabled();
+
     // No owner is auto-selected anymore — pick Trusted B explicitly first.
     fireEvent.click(
       screen.getByRole("button", {

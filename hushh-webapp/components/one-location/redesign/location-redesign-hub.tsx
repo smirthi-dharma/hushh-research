@@ -1911,6 +1911,7 @@ function AskFlow({
   onClose: () => void;
 }) {
   const filtered = vm.visibleRecipients;
+  const canSendRequest = vm.selectedRequestOwnerIds.length > 0;
   return (
     <div className="space-y-5">
       <TaskFlowHeader
@@ -1986,9 +1987,9 @@ function AskFlow({
           vm.onSendRequest();
           onClose();
         }}
-        disabled={!vm.selectedRequestOwnerIds.length}
+        disabled={!canSendRequest}
         isLoading={vm.busy === "request"}
-        className="h-12 w-full rounded-2xl bg-[color:var(--app-accent)] text-base font-semibold text-[color:var(--app-accent-fg)] hover:bg-[color:var(--app-accent)]/90 disabled:opacity-50"
+        className="h-12 w-full rounded-2xl bg-[color:var(--app-accent)] text-base font-semibold text-[color:var(--app-accent-fg)] hover:bg-[color:var(--app-accent)]/90 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-100 disabled:shadow-none"
       >
         Send request
       </Button>
