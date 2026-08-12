@@ -123,6 +123,7 @@ import {
   TOP_SHELL_TAB_REGISTRY,
 } from "@/lib/navigation/top-shell-tabs";
 import { beginRouteTransition } from "@/lib/morphy-ux/hooks/use-route-transition";
+import { TOP_SHELL_BACK_INTERCEPT_EVENT } from "@/lib/utils/browser-navigation";
 
 const LOCATION_TAB_DEFINITION = TOP_SHELL_TAB_REGISTRY.location;
 type LocationHubTab = (typeof LOCATION_TAB_DEFINITION.tabs)[number]["value"];
@@ -191,6 +192,8 @@ export type LocationHubViewModel = {
   setDurationHours: (v: string) => void;
   setRequestMessage: (v: string) => void;
   setShareReviewOpen: (v: boolean) => void;
+  onResetShareComposer?: () => void;
+  onResetRequestComposer?: () => void;
 
   /* selection */
   toggleShareRecipient: (id: string, surface?: string) => void;
@@ -509,7 +512,13 @@ export function LocationRedesignHub({ vm }: { vm: LocationHubViewModel }) {
       setFlow("none");
       pendingFlowRef.current = "none";
       setShareStep("person");
+      setLocationType("precise");
+      setReason("Safety check-in");
       vm.setShareReviewOpen(false);
+
+      vm.onResetShareComposer?.();
+      vm.onResetRequestComposer?.();
+
       if (nextTab) {
         setTabState(nextTab);
       }
@@ -534,9 +543,33 @@ export function LocationRedesignHub({ vm }: { vm: LocationHubViewModel }) {
     setFlow("none");
     pendingFlowRef.current = "none";
     setShareStep("person");
+    setLocationType("precise");
+    setReason("Safety check-in");
     vm.setShareReviewOpen(false);
+
+    vm.onResetShareComposer?.();
+    vm.onResetRequestComposer?.();
+
     router.replace(nearbyCheckInReturnHref, { scroll: false });
   }, [nearbyCheckInReturnHref, router, vm]);
+
+  useEffect(() => {
+    const handleTopShellBack = (event: Event) => {
+      if (flow !== "none" || pendingFlowRef.current !== "none") {
+        event.preventDefault();
+
+        if (nearbyPrivateCheckIn) {
+          returnToNearbyCheckIn();
+        } else {
+          closeFlow();
+        }
+      }
+    };
+    window.addEventListener(TOP_SHELL_BACK_INTERCEPT_EVENT, handleTopShellBack);
+    return () => {
+      window.removeEventListener(TOP_SHELL_BACK_INTERCEPT_EVENT, handleTopShellBack);
+    };
+  }, [flow, closeFlow, nearbyPrivateCheckIn, returnToNearbyCheckIn]);
 
   // Keep the flow view in sync with the URL action param: the chrome/OS back
   // button strips the param, which closes the flow back to the hub. A direct

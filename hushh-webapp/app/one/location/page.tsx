@@ -3070,12 +3070,17 @@ export function OneLocationAgentPageContent({
     setShareReviewOpen(false);
     setShareDurationHours(ONE_LOCATION_SHARE_DEFAULT_DURATION_HOURS);
     setShareMessage("");
+    setRecipientSearch("");
+    setBusy(null);
   }, []);
   const resetRequestComposer = useCallback(() => {
     suppressAutoRecipientSelectionRef.current = true;
     setSelectedRequestOwnerId("");
     setSelectedRequestOwnerIds([]);
     setRequestMessage("");
+    setDurationHours(ONE_LOCATION_SHARE_DEFAULT_DURATION_HOURS);
+    setRecipientSearch("");
+    setBusy(null);
   }, []);
 
   const handleShare = useCallback(async () => {
@@ -6211,6 +6216,8 @@ export function OneLocationAgentPageContent({
     setDurationHours,
     setRequestMessage,
     setShareReviewOpen,
+    onResetShareComposer: resetShareComposer,
+    onResetRequestComposer: resetRequestComposer,
     toggleShareRecipient: (id) => toggleShareRecipient(id, "section_list"),
     toggleRequestOwner: (id) => toggleRequestOwner(id, "section_list"),
     onShowMyLocation: () => void handleShowMyLiveLocation(),

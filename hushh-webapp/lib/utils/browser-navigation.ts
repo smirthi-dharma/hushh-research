@@ -2,6 +2,8 @@
 
 export const INTERNAL_APP_NAVIGATION_REQUEST_EVENT = "app-internal-navigation-requested";
 
+export const TOP_SHELL_BACK_INTERCEPT_EVENT = "top-shell-back-intercept";
+
 export type InternalAppNavigationRequest = {
   href: string;
   replace?: boolean;
@@ -45,4 +47,13 @@ export function requestInternalAppNavigation(
     )
   );
   return true;
+}
+
+export function requestTopShellBackIntercept(): boolean {
+  if (!canUseWindow()) return false;
+  const event = new CustomEvent(TOP_SHELL_BACK_INTERCEPT_EVENT, {
+    cancelable: true,
+  });
+  window.dispatchEvent(event);
+  return event.defaultPrevented;
 }

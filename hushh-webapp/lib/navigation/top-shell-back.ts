@@ -3,6 +3,7 @@ import {
   type TopShellBreadcrumbConfig,
 } from "@/lib/navigation/top-shell-breadcrumbs";
 import { ROUTES } from "@/lib/navigation/routes";
+import { requestTopShellBackIntercept } from "@/lib/utils/browser-navigation";
 
 type SearchParamsLike = { get(name: string): string | null } | null | undefined;
 
@@ -49,6 +50,8 @@ export function navigateTopShellBack(params: {
   breadcrumb?: TopShellBreadcrumbConfig | null;
   navigate: (action: TopShellBackAction) => void;
 }): boolean {
+  if (requestTopShellBackIntercept()) return true;
+
   const action = resolveTopShellBackAction(params);
   if (!action) return false;
   params.navigate(action);
