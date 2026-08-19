@@ -43,7 +43,7 @@ function SectionCard({
         <button
           type="button"
           onClick={onEdit}
-          className="inline-flex h-8 items-center gap-1.5 rounded-[16px] border px-3 text-[13px] font-semibold transition-opacity hover:opacity-80"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-[16px] border px-3 text-[13px] font-semibold transition-opacity hover:opacity-80"
           style={{
             background: "var(--ria-selected-tint)",
             borderColor: "#E8E0D3",
@@ -138,7 +138,7 @@ function BioReviewRow({ bio }: { bio: string }) {
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="mt-[7px] flex items-center justify-center"
+            className="mt-[7px] inline-flex min-h-11 min-w-11 items-center justify-center rounded-full"
             aria-label={open ? "Collapse bio" : "Expand bio"}
           >
             {open ? (
@@ -207,7 +207,7 @@ export function OnboardingStepReview({
       </SectionCard>
 
       {/* Canonical onboarding state: profile goes live as Pending Verification;
-          the verified badge is a separate later layer (design shows gold). */}
+          verified status arrives later without exposing rollout terminology. */}
       <div
         className="flex items-start gap-3 rounded-[18px] border border-[color:var(--app-card-border-standard)] bg-[color:var(--app-card-surface-default-solid)] p-4 text-[color:var(--app-secondary-label)]"
       >
@@ -216,7 +216,7 @@ export function OnboardingStepReview({
           strokeWidth={1.7}
         />
         <span className="text-[13.5px] font-medium leading-[1.45]">
-          Goes live as Pending Verification. Verified unlocks after Phase 2.
+          Goes live as Pending Verification. We’ll update the status when verification completes.
         </span>
       </div>
 
