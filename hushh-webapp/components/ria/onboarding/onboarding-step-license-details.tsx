@@ -2,13 +2,11 @@
 
 import { Pencil, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SettingsGroup, SettingsRow } from "@/components/app-ui/settings-ui";
 
 function EnrichingPlaceholder() {
   return <span className="h-5 w-28 animate-pulse rounded bg-muted/50" />;
 }
-
-
-
 
 function InfoRow({
   label,
@@ -23,17 +21,21 @@ function InfoRow({
 }) {
   return (
     <SettingsRow
-      title={<span className="whitespace-nowrap">{label}</span>}
+      title={label}
+      stackTrailingOnMobile
       trailing={
-        <span className={cn("text-[15px] font-medium text-foreground", numeric && "tabular-nums")}>
+        <span
+          className={cn(
+            "block max-w-full text-left text-[15px] font-medium leading-snug text-foreground [overflow-wrap:anywhere] sm:max-w-[20rem] sm:text-right",
+            numeric && "tabular-nums",
+          )}
+        >
           {loading ? <EnrichingPlaceholder /> : value?.trim() || "Not returned"}
         </span>
       }
     />
   );
 }
-
-import { SettingsGroup, SettingsRow } from "@/components/app-ui/settings-ui";
 
 function EditableRow({
   label,
@@ -50,17 +52,21 @@ function EditableRow({
 }) {
   return (
     <SettingsRow
-      title={<span className="whitespace-nowrap">{label}</span>}
+      title={label}
+      stackTrailingOnMobile
       trailing={
         loading ? (
           <EnrichingPlaceholder />
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex w-full min-w-0 items-center gap-2 sm:w-auto">
             <input
               type="text"
               value={value}
               onChange={(e) => onChange(e.target.value)}
-              className={cn("bg-transparent min-w-[120px] max-w-[200px] text-right text-[15px] outline-none text-foreground placeholder:text-muted-foreground", numeric && "tabular-nums")}
+              className={cn(
+                "min-w-0 flex-1 bg-transparent text-left text-[15px] text-foreground outline-none placeholder:text-muted-foreground sm:min-w-[120px] sm:max-w-[200px] sm:text-right",
+                numeric && "tabular-nums",
+              )}
             />
             <Pencil className="h-4 w-4 shrink-0 text-muted-foreground" />
           </div>
