@@ -1,0 +1,20 @@
+.shell { position: relative; inline-size: 100%; min-block-size: 100svh; background: #f6f5fc; color: #0a0a0a; isolation: isolate; }
+:global(.dark) .shell { background: #000; color: #f2f2f7; }
+.composition { display: grid; justify-items: center; inline-size: 100%; max-inline-size: 402px; margin-inline: auto; padding: max(24px, var(--app-safe-area-top-effective, 0px)) clamp(20px, 7.21vw, 29px) max(32px, calc(var(--kb-height, 0px) + var(--app-safe-area-bottom-effective, 0px))); }
+.topBar { display: flex; inline-size: 100%; align-items: center; justify-content: space-between; }
+.backButton, .accountButton { display: grid; inline-size: 43px; block-size: 43px; place-items: center; border: 0; border-radius: 999px; color: #17130c; background: rgba(255,255,255,.72); box-shadow: 0 4px 15px rgba(150,196,255,.22); backdrop-filter: blur(10px); }
+:global(.dark) .backButton, :global(.dark) .accountButton { color: #fff; background: #1c1c1e; box-shadow: none; }
+.hero { margin-block: 16px 20px; }
+.title { margin: 0; color: inherit; font-family: var(--font-app-display); font-size: clamp(22px, 6.7vw, 27px); font-weight: 700; letter-spacing: -.7px; line-height: 1.2; text-align: center; }
+.inputRegion { min-inline-size: 0; inline-size: 100%; margin-block-start: 26px; }
+.inputRegion::-webkit-scrollbar { display: none; }
+.title { --foundation-title1-size: clamp(22px, 6.7vw, 27px); --foundation-title1-line: 1.2; }
+.phoneForm { inline-size: 100%; }
+.phoneForm :global([data-slot="field-set"]) { gap: clamp(24px, 8vw, 37px) !important; }
+.phoneForm :global([data-slot="field-group"]) { gap: 11px !important; }
+.phoneForm :global([data-slot="field"]) { gap: 9px !important; }
+.phoneForm :global([data-slot="field-label"]) { padding-inline-start: 11px; color: #6f6f77 !important; font-size: 13px !important; font-weight: 600 !important; }
+.phoneForm :global([data-slot="input-group"]) { block-size: 60px !important; min-block-size: 60px; border-radius: 16px !important; }
+.primaryAction { min-block-size: 52px !important; inline-size: 100% !important; margin-inline: auto !important; border-radius: 999px !important; white-space: nowrap; }
+.recaptcha { display: none; }
+:global(.dark) .phoneForm :global([data-slot="input-group"]) { border: 0 !important; background: #1c1c1e !important; box-shadow: none !important; }

@@ -1,0 +1,48 @@
+.shell {
+  position: relative;
+  inline-size: 100%;
+  min-block-size: 100svh;
+  background: #f6f5fc;
+  color: #0a0a0a;
+  padding-block: max(24px, var(--app-safe-area-top-effective, 0px)) max(32px, var(--app-safe-area-bottom-effective, 0px));
+}
+:global(.dark) .shell { background: #000; color: #fafafa; }
+.shell .authBackButton {
+  position: relative;
+  inset: auto;
+  margin-inline-start: max(20px, calc((100% - 354px) / 2));
+}
+.content {
+  inline-size: 100%;
+  max-inline-size: 402px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 7.21vw, 29px);
+}
+.shell :global([data-auth-signin-clusters]) { gap: 26px; padding: 16px 0 0; }
+.shell :global([data-auth-hero]) { inline-size: 100%; gap: 20px; }
+.authIllustration { max-inline-size: 219px; }
+.shell .authTitle {
+  --foundation-title1-size: clamp(23px, 6.72vw, 27px);
+  --foundation-title1-line: 1.2;
+  margin: 0;
+}
+.shell :global([data-auth-provider-actions-shell]),
+.shell :global([data-auth-provider-actions]) { inline-size: 100%; }
+.shell :global([data-auth-provider-actions]) { gap: 12px; }
+.authProviderButton {
+  min-block-size: 60px !important;
+  border-radius: 16px !important;
+  font-size: clamp(15px, 4.23vw, 17px) !important;
+  font-weight: 510 !important;
+  white-space: nowrap;
+}
+.supportingContent {
+  display: flex;
+  min-block-size: 28px;
+  justify-content: center;
+  margin-block-start: clamp(24px, calc(100svh - 660px), 150px);
+}
+@media (max-height: 700px) {
+  .shell { padding-block-start: 16px; }
+  .shell :global([data-auth-signin-clusters]) { gap: 20px; }
+}

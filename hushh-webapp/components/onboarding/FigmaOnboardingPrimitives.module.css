@@ -1,0 +1,243 @@
+.themeLight {
+  display: block;
+}
+
+.themeDark {
+  display: none;
+}
+
+:global(.dark) .themeLight {
+  display: none;
+}
+
+:global(.dark) .themeDark {
+  display: block;
+}
+
+:global(html:not(.dark)) .themeDark {
+  display: none;
+}
+
+.illustration {
+  position: relative;
+  flex: none;
+  isolation: isolate;
+  aspect-ratio: 287 / 314;
+}
+
+/* A shared artwork halo, not page chrome. Keep it blue even when the user's
+   control accent is gold, and bound it within the viewport at narrow widths. */
+.illustration::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset-block: -8%;
+  inset-inline-start: 50%;
+  inline-size: min(calc(100vw - 32px), 140%);
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse 50% 45% at 50% 50%,
+    rgb(40 100 230 / 14%) 0%,
+    rgb(40 100 230 / 6%) 42%,
+    transparent 100%
+  );
+}
+
+:global(.dark) .illustration::before {
+  background: radial-gradient(
+    ellipse 50% 45% at 50% 50%,
+    rgb(40 100 230 / 36%) 0%,
+    rgb(40 100 230 / 16%) 42%,
+    transparent 100%
+  );
+}
+
+.illustrationCrop {
+  position: absolute;
+  inset: 0;
+  /* Crop only the empty image-export margins, never the content stack. */
+  overflow: hidden;
+  mix-blend-mode: multiply;
+}
+
+:global(.dark) .illustrationCrop { mix-blend-mode: screen; }
+
+/* Source crop (668,765,158,163) in the 1536x1024 dark export. Match its
+   proportions in the shared illustration box without changing flow or glow. */
+.lightEmoji {
+  position: absolute;
+  inset-block-start: 74.707%;
+  inset-inline-start: 47.756%;
+  inline-size: 16.881%;
+  block-size: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+:global(.dark) .lightEmoji { display: none; }
+
+.illustrationIntro {
+  width: min(100%, 287px);
+}
+
+.illustrationCompact {
+  width: min(100%, 219px);
+}
+
+.illustrationImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Trim the export's empty canvas, not the illustration. Both themes occupy
+     the same layout box; only their different intrinsic image margins differ. */
+  position: absolute;
+  top: -23%;
+  left: 0;
+  object-position: center;
+  user-select: none;
+}
+
+:global(.dark) .illustrationImage {
+  width: 164.11%;
+  max-width: none;
+  height: 100%;
+  top: 0;
+  left: -32.055%;
+  object-fit: contain;
+}
+
+.hushhLogo {
+  display: block;
+  width: 97px;
+  height: 27px;
+  user-select: none;
+}
+
+.oneLogo {
+  display: block;
+  width: 221px;
+  height: auto;
+  user-select: none;
+}
+
+.backButton {
+  position: absolute;
+  top: 72px;
+  left: 23px;
+  z-index: 30;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(10, 10, 10, 0.72);
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 4px 15px rgba(150, 196, 255, 0.22);
+  backdrop-filter: blur(10px);
+  transition:
+    transform var(--motion-duration-sm) var(--motion-ease-standard),
+    background-color var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.backButton:active {
+  transform: scale(0.94);
+}
+
+.backButton:disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.backIcon {
+  width: 18px;
+  height: 18px;
+}
+
+:global(.dark) .backButton {
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(28, 28, 30, 0.82);
+  box-shadow: none;
+}
+
+:global(.dark) .backButton:hover {
+  background: rgba(48, 48, 52, 0.9);
+}
+
+.privacyNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: min(100%, 233px);
+  color: rgba(122, 122, 128, 0.92);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+}
+
+:global(.dark) .privacyNote { color: #bfbfbf; }
+
+.privacyIcon {
+  display: block;
+  width: 32px;
+  height: 26px;
+  flex: none;
+}
+
+.providerIcon {
+  display: block;
+  width: 23px;
+  height: 23px;
+  flex: none;
+  object-fit: contain;
+}
+
+.appleIcon {
+  width: 23px;
+}
+
+.googleIcon {
+  width: 23px;
+}
+
+:global(html:not(.dark)) .appleIcon {
+  filter: invert(1);
+}
+
+.countryFlag {
+  display: block;
+  width: 31px;
+  height: 22px;
+  flex: none;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+@media (max-height: 740px) {
+  .backButton {
+    top: 58px;
+  }
+
+  .illustrationIntro {
+    width: min(100%, 245px);
+  }
+
+  .illustrationCompact {
+    width: min(100%, 190px);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backButton {
+    transition: none;
+  }
+}
