@@ -96,12 +96,14 @@ export function IntroStep({ onLogin }: { onLogin?: () => void }) {
             Your private agent
           </span>
 
-          <span
+          <img
+            src="/quiet-emoji-icon.png"
+            alt=""
             aria-hidden="true"
+            draggable={false}
+            data-testid="one-quiet-mark"
             className={styles.emoji}
-          >
-            🤫
-          </span>
+          />
 
           <h1 className={styles.title}>
             <span className={styles.molten}>

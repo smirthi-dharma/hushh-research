@@ -59,7 +59,7 @@ describe("IntroStep voice contract", () => {
     render(<IntroStep onLogin={vi.fn()} />);
 
     const privateAgent = screen.getByText("Your private agent");
-    const quietMark = screen.getByText("🤫");
+    const quietMark = screen.getByTestId("one-quiet-mark");
     const one = screen.getByRole("heading", { name: "One" });
 
     expect(privateAgent.compareDocumentPosition(quietMark)).toBe(

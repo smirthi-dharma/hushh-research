@@ -31,11 +31,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Hussh Labs" }],
   icons: {
     icon: [
-      { url: "/quiet-emoji-icon.svg", type: "image/svg+xml" },
       { url: "/quiet-emoji-icon.png", type: "image/png", sizes: "512x512" },
       { url: "/favicon.ico", sizes: "any" },
     ],
-    shortcut: "/quiet-emoji-icon.svg",
+    shortcut: "/quiet-emoji-icon.png",
     apple: "/quiet-emoji-icon.png",
   },
   appleWebApp: {

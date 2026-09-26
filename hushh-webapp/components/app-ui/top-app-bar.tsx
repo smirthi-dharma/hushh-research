@@ -959,16 +959,13 @@ export function AppTopShell({ className, model }: AppTopShellProps) {
                       aria-label="One."
                       className="top-shell-ambient-ink pointer-events-none flex h-11 min-w-[92px] items-center justify-start gap-2 overflow-visible text-current"
                     >
-                      <span
+                      <img
+                        src="/quiet-emoji-icon.png"
+                        alt=""
                         aria-hidden
-                        className="flex h-7 w-7 shrink-0 items-center justify-center overflow-visible text-[23px] leading-none"
-                        style={{
-                          fontFamily:
-                            '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji',
-                        }}
-                      >
-                        🤫
-                      </span>
+                        draggable={false}
+                        className="h-7 w-7 shrink-0 rounded-[7px] object-contain"
+                      />
                       <span
                         aria-hidden
                         className="whitespace-nowrap text-[20px] font-semibold leading-none tracking-[-0.035em] text-current"

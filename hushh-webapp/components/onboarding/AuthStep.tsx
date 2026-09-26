@@ -1056,16 +1056,19 @@ export function AuthStep({
           data-auth-signin-clusters
         >
           <div className="flex flex-col items-center gap-4">
-            {/* Quiet mark: the bare 🤫 over a soft accent glow, no medallion
-                chrome (badge circle removed by design). */}
+            {/* Quiet mark: the canonical app icon over a soft accent glow, no
+                medallion chrome (badge circle removed by design). */}
             <div
               className="relative flex h-[92px] w-[92px] items-center justify-center"
               aria-hidden="true"
             >
               <span className="pointer-events-none absolute h-28 w-28 rounded-full bg-accent/20 blur-2xl" />
-              <span className="relative select-none text-[56px] leading-none drop-shadow-[0_6px_14px_rgba(0,0,0,0.25)]">
-                🤫
-              </span>
+              <img
+                src="/quiet-emoji-icon.png"
+                alt=""
+                draggable={false}
+                className="relative h-[56px] w-[56px] select-none rounded-[24%] drop-shadow-[0_6px_14px_rgba(0,0,0,0.25)]"
+              />
             </div>
             <h1
               role="heading"

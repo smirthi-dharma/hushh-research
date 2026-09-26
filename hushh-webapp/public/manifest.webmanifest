@@ -3,12 +3,6 @@
   "short_name": "hussh One",
   "icons": [
     {
-      "src": "/quiet-emoji-icon.svg",
-      "type": "image/svg+xml",
-      "sizes": "any",
-      "purpose": "any maskable"
-    },
-    {
       "src": "/quiet-emoji-icon.png",
       "type": "image/png",
       "sizes": "512x512",
