@@ -3840,8 +3840,8 @@ export function AgentChatWorkspace({
                 <Image
                   src="/one-quiet-emoji.png"
                   alt="One"
-                  width={762}
-                  height={766}
+                  width={809}
+                  height={837}
                   unoptimized
                   draggable={false}
                   className="h-6 w-6 object-contain max-sm:h-8 max-sm:w-8"

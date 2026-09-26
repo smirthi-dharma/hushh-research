@@ -14,8 +14,8 @@ export function QuietEmoji({ className }: { className?: string }) {
       src="/one-quiet-emoji.png"
       alt="🤫"
       aria-hidden
-      width={762}
-      height={766}
+      width={809}
+      height={837}
       unoptimized
       draggable={false}
       className={cn(
