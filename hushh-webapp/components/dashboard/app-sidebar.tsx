@@ -13,7 +13,7 @@ import {
   SidebarMenuBadge,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { Icon, SidebarMenuButton } from "@/lib/morphy-ux/ui";
+import { Icon, QuietEmoji, SidebarMenuButton } from "@/lib/morphy-ux/ui";
 import { buildConsentCenterHref } from "@/lib/consent/consent-sheet-route";
 import { useConsentPendingSummaryCount } from "@/lib/consent/use-consent-pending-summary-count";
 import { KAI_MARKET_PATH, ROUTES } from "@/lib/navigation/routes";
@@ -35,7 +35,9 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader className="h-16 flex items-center justify-start border-b px-4">
         <div className="flex items-center gap-2">
-          <span className="text-2xl">🤫</span>
+          <span className="text-2xl">
+            <QuietEmoji />
+          </span>
           <div>
             <h2 className="font-semibold">Hussh PDA</h2>
             <p className="text-xs text-muted-foreground">Memory Agent</p>

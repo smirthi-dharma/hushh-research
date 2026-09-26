@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { QuietEmoji } from "./quiet-emoji";
 
 const BRAND_MARK_SIZE_CLASSES = {
   sm: "h-[72px] w-[72px] rounded-[20px] text-[30px]",
@@ -35,7 +36,9 @@ export function BrandMark({
         className,
       )}
     >
-      <span className="leading-none">{label}</span>
+      <span className="leading-none">
+        {label === "🤫" ? <QuietEmoji /> : label}
+      </span>
     </div>
   );
 }
