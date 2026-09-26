@@ -34,7 +34,7 @@ export function BrandMark({
       )}
     >
       <img
-        src="/quiet-emoji-icon.png"
+        src="/quiet-emoji-icon-transparent.png"
         alt=""
         draggable={false}
         className="h-full w-full object-contain"

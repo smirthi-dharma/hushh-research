@@ -97,7 +97,7 @@ export function IntroStep({ onLogin }: { onLogin?: () => void }) {
           </span>
 
           <img
-            src="/quiet-emoji-icon.png"
+            src="/quiet-emoji-icon-transparent.png"
             alt=""
             aria-hidden="true"
             draggable={false}

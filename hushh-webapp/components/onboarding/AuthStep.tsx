@@ -1064,10 +1064,10 @@ export function AuthStep({
             >
               <span className="pointer-events-none absolute h-28 w-28 rounded-full bg-accent/20 blur-2xl" />
               <img
-                src="/quiet-emoji-icon.png"
+                src="/quiet-emoji-icon-transparent.png"
                 alt=""
                 draggable={false}
-                className="relative h-[56px] w-[56px] select-none rounded-[24%] drop-shadow-[0_6px_14px_rgba(0,0,0,0.25)]"
+                className="relative h-[56px] w-[56px] select-none drop-shadow-[0_6px_14px_rgba(0,0,0,0.25)]"
               />
             </div>
             <h1

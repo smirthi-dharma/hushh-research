@@ -960,11 +960,11 @@ export function AppTopShell({ className, model }: AppTopShellProps) {
                       className="top-shell-ambient-ink pointer-events-none flex h-11 min-w-[92px] items-center justify-start gap-2 overflow-visible text-current"
                     >
                       <img
-                        src="/quiet-emoji-icon.png"
+                        src="/quiet-emoji-icon-transparent.png"
                         alt=""
                         aria-hidden
                         draggable={false}
-                        className="h-7 w-7 shrink-0 rounded-[7px] object-contain"
+                        className="h-7 w-7 shrink-0 object-contain"
                       />
                       <span
                         aria-hidden

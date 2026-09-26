@@ -3838,10 +3838,10 @@ export function AgentChatWorkspace({
               ) : null}
               <div className="grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-md border border-border bg-muted max-sm:h-11 max-sm:w-11 max-sm:rounded-[13px] max-sm:border-[color:var(--app-accent-border)]">
                 <Image
-                  src="/quiet-emoji-icon.png"
+                  src="/quiet-emoji-icon-transparent.png"
                   alt="One"
-                  width={512}
-                  height={512}
+                  width={632}
+                  height={632}
                   unoptimized
                   draggable={false}
                   className="h-6 w-6 object-contain max-sm:h-8 max-sm:w-8"
