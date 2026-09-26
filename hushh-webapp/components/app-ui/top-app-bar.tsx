@@ -47,7 +47,7 @@ import {
   APP_SHELL_FRAME_CLASSNAME,
   APP_SHELL_FRAME_STYLE,
 } from "@/components/app-ui/app-page-shell";
-import { Icon } from "@/lib/morphy-ux/ui";
+import { Icon, QuietEmoji } from "@/lib/morphy-ux/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -962,12 +962,8 @@ export function AppTopShell({ className, model }: AppTopShellProps) {
                       <span
                         aria-hidden
                         className="flex h-7 w-7 shrink-0 items-center justify-center overflow-visible text-[23px] leading-none"
-                        style={{
-                          fontFamily:
-                            '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji',
-                        }}
                       >
-                        🤫
+                        <QuietEmoji />
                       </span>
                       <span
                         aria-hidden

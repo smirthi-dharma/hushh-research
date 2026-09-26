@@ -11,7 +11,7 @@ import { NativeTestBeacon } from "@/components/app-ui/native-test-beacon";
 import { OnboardingHeroBackground } from "@/components/onboarding/OnboardingHeroBackground";
 import { useStepProgress } from "@/lib/progress/step-progress-context";
 import { isAndroid } from "@/lib/capacitor/platform";
-import { Icon } from "@/lib/morphy-ux/ui";
+import { Icon, QuietEmoji } from "@/lib/morphy-ux/ui";
 import { morphyToast } from "@/lib/morphy-ux/morphy";
 import { cn } from "@/lib/utils";
 import { AuthProviderButton } from "@/components/onboarding/AuthProviderButton";
@@ -1064,7 +1064,7 @@ export function AuthStep({
             >
               <span className="pointer-events-none absolute h-28 w-28 rounded-full bg-accent/20 blur-2xl" />
               <span className="relative select-none text-[56px] leading-none drop-shadow-[0_6px_14px_rgba(0,0,0,0.25)]">
-                🤫
+                <QuietEmoji />
               </span>
             </div>
             <h1
